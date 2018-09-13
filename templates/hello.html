@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>one django code </title>
+    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1 align="center" id="s1">Hello world</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input name=name type="text" placeholder="请输入用户名">
+        <hr>
+        <input name=password type="password" placeholder="请输入密码">
+        <hr>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>
+<script type="text/javascript">
+
+</script>

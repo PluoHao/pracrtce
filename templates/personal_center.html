@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>three Django personal_center</title>
+        <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <table align="center" border="1" cellpadding="20">
+        <tr>
+            <td>用户</td>
+            <td>{{sname}}</td>
+            <td><button id=u1>修改</button></td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td>{{password}}</td>
+            <td><button id=u2 >修改</button></td>
+        </tr>
+        <tr>
+            <td>身份证号</td>
+            <td>{{identity}}</td>
+            <td><button id=u3 >修改</button></td>
+        </tr>
+        <tr>
+            <td>手机号</td>
+            <td>{{phone}}</td>
+            <td><button id=u4 >修改</button></td>
+        </tr>
+    </table>
+    <form action="{% url 'password' %}" method="post">
+        {% csrf_token %}
+        <table cellpadding="20">
+            <tr>
+                <td><span></span></td>
+                <td><input type="text"></td>
+                <td><input type="submit" value="提交"></td>
+            </tr>
+        </table>
+    </form>
+    <a href="{% url 'index' %}">回到首页</a>
+</body>
+</html>
+<script>
+    $('#u1').click(function () {
+            $('span').html('修改用户名')
+            $('input[type=text]').attr('name','name')
+        });
+    $('#u2').click(function () {
+            $('span').html('修改密码')
+            $('input[type=text]').attr('name','password')
+        });
+    $('#u3').click(function () {
+            $('span').html('修改身份证号')
+            $('input[type=text]').attr('name','identity')
+        });
+    $('#u4').click(function () {
+            $('span').html('修改手机')
+            $('input[type=text]').attr('name','phone')
+        });
+</script>

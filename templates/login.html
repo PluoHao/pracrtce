@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>two django login</title>
+     <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1 align="center">Welcome To login</h1>
+    <FORM method="post">
+        {% csrf_token %}
+        <div>姓名<input name=name type="text" placeholder="请不要输入数字"></div>
+        <div>密码<input name=password type="password"></div>
+        <div id="div">再次输入密码<input id=pas type="password"></div>
+        <div>手机号 <input name=phone type="text" placeholder="请输入手机号"></div>
+        <div>手机号验证码<input type="text"></div>
+        <div>省份证号<input name="identity_card" type="text"></div>
+        <div><input type="submit" value="注册"></div>
+    </FORM>
+</body>
+</html>
+<script type="text/javascript">
+    var pss = $('input[name=password]').val();
+    var pas = $('#pas').val();
+    if(pas!=pss){
+        var text = $('<span></span>').text('密码错误');
+        $('#div').next()
+    }
+</script>
