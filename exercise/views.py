@@ -85,3 +85,6 @@ def password(request):
     uname.save()
     return redirect('center')
 
+
+def address(request):
+    return render(request,'address.html')
