@@ -28,6 +28,33 @@
             <td>{{phone}}</td>
             <td><button id=u4 >修改</button></td>
         </tr>
+        <tr bgcolor="yellow">
+            <td colspan="3" align="center">收货地址管理</td>
+        </tr>
+        {% for x in addr %}
+            <tr>
+                <td>收货人</td>
+                <td>{{x.Aname}}</td>
+                <td rowspan="4">
+                    <button>修改</button>
+                </td>
+            </tr>
+            <tr>
+                <td>收货人手机</td>
+                <td>{{x.Aphone}}</td>
+
+            </tr>
+            <tr>
+                <td>收货地址</td>
+                <td>{{x.ADS}}</td>
+
+            </tr>
+            <tr>
+                <td>订单号</td>
+                <td>{{x.orderId}}</td>
+
+            </tr>
+        {% endfor %}
     </table>
     <form action="{% url 'password' %}" method="post">
         {% csrf_token %}

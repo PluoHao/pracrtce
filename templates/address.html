@@ -6,5 +6,23 @@
 </head>
 <body>
     <h1 align="center">欢迎进入添加地址页</h1>
+    <form action="" method="post">{% csrf_token%}
+        收货人
+        <input type="text" placeholder="请输入收货人" name="name">
+        <br>
+        手机号
+        <input type="text" placeholder="请输入手机号码" name="phone">
+        <br>
+        验证码
+        <input type="text" placeholder="请输入手机验证码">
+        <br>
+        地址：
+        <input type="text" placeholder="请输入收货地址" name="address">
+        <br>
+        <input type="submit" value="提交">
+    </form>
+
+
+
 </body>
 </html>

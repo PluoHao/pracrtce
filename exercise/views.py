@@ -1,3 +1,6 @@
+import random
+
+from django.contrib.auth import logout
 from django.contrib.auth.hashers import make_password,check_password
 from django.shortcuts import render,HttpResponse,redirect
 from .models import *
@@ -51,12 +54,17 @@ def login(request):
     return redirect('hello')
 
 def index(request):
-    user = request.session.get('name')
-    return render(request,'index.html',locals())
+    try:
+        user = request.session.get('name')
+        return render(request,'index.html',locals())
+    except DatabaseError as e:
+        logging.warning(e)
+        return HttpResponse('''请登录<a href="{url 'hello' }">登录</a>''')
 
 def personal(request):
     user = request.session.get('name')
     name = USER.objects.filter(uname=user)
+    addr = Address.objects.filter(USER_id=request.session.get('id'))
     for x in name:
         phone = x.uphone
         phone = phone[0:3]+"*****"+phone[len(phone)-3:len(phone)]
@@ -65,6 +73,7 @@ def personal(request):
         identity = x.identity
         identity = identity[0:6]+'******'+identity[len(identity)-4:len(identity)]
     return render(request,'personal_center.html',locals())
+
 
 def password(request):
     name = request.session.get('name')
@@ -85,6 +94,33 @@ def password(request):
     uname.save()
     return redirect('center')
 
-
 def address(request):
-    return render(request,'address.html')
+    if request.method == 'GET':
+        return render(request,'address.html')
+    elif request.method == 'POST':
+        try:
+            addr = Address()
+            addr.Aname = request.POST['name']
+            addr.Aphone = request.POST['phone']
+            addr.ADS = request.POST['address']
+            s = ''
+            for x in range(20):
+                s += str(int(random.random() * 10))
+            print(s)
+            addr.orderId = s
+            addr.USER_id = request.session['id']
+        except DatabaseError as e:
+            logging.warning(e)
+            return render(request,'address.html')
+        addr.save()
+        return redirect('index')
+
+def quits(request):
+    try:
+        s = request.session.get('name')
+        del s
+    except DatabaseError as e:
+        logging.warning(e)
+        return redirect('hello')
+    return HttpResponse('你已退出{}'.format(request.session.get('name')))
+
